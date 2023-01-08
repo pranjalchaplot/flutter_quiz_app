@@ -9,19 +9,19 @@ class MyApp extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
-  void answerChosen() {
+class _MyAppState extends State<MyApp> {
+  void _answerChosen() {
     setState(() {
-      questionIndex++;
-      questionIndex %= 2;
+      _questionIndex++;
+      _questionIndex %= 2;
     });
   }
 
-  var questionIndex = 0;
+  var _questionIndex = 0;
   var questions = [
     'What\'s the current best Anime?',
     'What\'s the greatest anime of all time',
@@ -36,17 +36,17 @@ class MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text(questions[questionIndex]),
+            Text(questions[_questionIndex]),
             ElevatedButton(
-              onPressed: answerChosen,
+              onPressed: _answerChosen,
               child: const Text('jai'),
             ),
             ElevatedButton(
-              onPressed: answerChosen,
+              onPressed: _answerChosen,
               child: const Text('shree'),
             ),
             ElevatedButton(
-              onPressed: answerChosen,
+              onPressed: _answerChosen,
               child: const Text('ram'),
             ),
           ],
