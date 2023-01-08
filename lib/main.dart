@@ -4,21 +4,39 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  void answerChosen() => print('answer chosen!');
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  void answerChosen() {
+    setState(() {
+      questionIndex++;
+      questionIndex %= 2;
+    });
+  }
+
+  var questionIndex = 0;
+  var questions = [
+    'What\'s the current best Anime?',
+    'What\'s the greatest anime of all time',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('good morning'),
+          title: const Text('Anime Quiz'),
         ),
         body: Column(
           children: [
-            const Text("jai bajrang bali"),
+            Text(questions[questionIndex]),
             ElevatedButton(
               onPressed: answerChosen,
               child: const Text('jai'),
