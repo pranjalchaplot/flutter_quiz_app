@@ -1,3 +1,4 @@
+import 'package:first_app/answer.dart';
 import 'package:flutter/material.dart';
 
 import './question.dart';
@@ -25,8 +26,24 @@ class _MyAppState extends State<MyApp> {
 
   var _questionIndex = 0;
   var questions = [
-    'What\'s the current best Anime?',
-    'What\'s the greatest anime of all time',
+    {
+      'questionText': 'What\'s the current best Anime?',
+      'answers': [
+        'Chainsaw Man',
+        'Demon Slayer',
+        'Jujutsu Kaisen',
+        'SPYxFAMILY',
+      ]
+    },
+    {
+      'questionText': 'What\'s the greatest anime of all time',
+      'answers': [
+        'Dragon Ball',
+        'Death Note',
+        'Pokemon',
+        'Doraemon',
+      ]
+    },
   ];
 
   @override
@@ -36,23 +53,13 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Anime Quiz'),
         ),
-        body: Column(
-          children: [
-            Question(questions[_questionIndex]),
-            ElevatedButton(
-              onPressed: _answerChosen,
-              child: const Text('jai'),
-            ),
-            ElevatedButton(
-              onPressed: _answerChosen,
-              child: const Text('shree'),
-            ),
-            ElevatedButton(
-              onPressed: _answerChosen,
-              child: const Text('ram'),
-            ),
-          ],
-        ),
+        body: Column(children: [
+          Question(questions[_questionIndex]['questionText'] as String),
+          ...(questions[_questionIndex]['answers'] as List<String>)
+              .map((answer) {
+            return Answer(answer, _answerChosen);
+          }).toList(),
+        ]),
       ),
     );
   }
